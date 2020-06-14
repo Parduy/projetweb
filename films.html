@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/fe6070e42e.js" crossorigin="anonymous"></script>
+    <link href="https://file.myfontastic.com/FVqhjvFpRBCZQjWy3VpicD/icons.css" rel="stylesheet">
+
+    <script src="../js/script.js"></script>
+    <link href="../css/style.css" rel="stylesheet">
+
+    <title>Films</title>
+    <script>
+        $(document).ready(function(){
+            
+            $('#term').focus(function(){
+                var full = $("#poster").has("img").length ? true : false;
+                if(full == false){
+                    $('#poster').empty();
+                }
+            });
+
+            var getPoster = function(){
+
+                var film = $('#term').val();
+
+                if(film == ''){
+
+                    $('#poster').html('<div class="alert"><strong>Oops!</strong> Try adding something into the search field.</div>');
+
+                } else {
+
+                    $('#poster').html('<div class="alert"><strong>Loading...</strong></div>');
+
+                    $.getJSON("https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=" + film + "&callback=?", function(json) {
+                        if (json != "Nothing found."){
+                            console.log(json);
+                            $('#poster').html('<p>Your search found: <strong>' + json.results[0].title + '</strong></p><img src=\"http://image.tmdb.org/t/p/w500/' + json.results[0].poster_path + '\" class=\"img-responsive\" >');
+                        } else {
+                            $.getJSON("https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=goonies&callback=?", function(json) {
+
+                                console.log(json);
+                                $('#poster').html('<div class="alert"><p>We\'re afraid nothing was found for that search.</p></div><p>Perhaps you were looking for The Goonies?</p><img id="thePoster" src="http://image.tmdb.org/t/p/w500/' + json[0].poster_path + ' class="img-responsive" />');
+                            });
+                        }
+                    });
+
+                }
+
+                return false;
+            }
+
+            $('#search').click(getPoster);
+            $('#term').keyup(function(event){
+                if(event.keyCode == 13){
+                    getPoster();
+                }
+            });
+
+        });
+
+
+
+    </script>
+</head>
+<body>
+    <nav class="top-nav">
+        <div>
+            <img src="../images/logo.PNG" alt="logo" class="logo">
+        </div>
+        <input id="menu-toggle" type="checkbox" />
+        <label class='menu-button-container' for="menu-toggle">
+            <div class='menu-button'></div>
+        </label>
+
+        <ul class="menu">
+          <li><a href="../index.html">Accueil</a></li>
+          <li><a href="films.html">Films</a></li>
+          <li><a href="mangas.html">Mangas</a></li>
+        </ul>
+    </nav>
+    <section class="main">
+
+
+
+        <h2>Les meilleurs films à venir !</h2>
+        <div class="content-film">
+            <div class="bloc">
+                <img src="../images/Tenet.jpg">
+                <p>Tenet</p>
+                <p>22 Juillet 2020</p>
+                <p>De Christopher Nolan</p>
+                <label class="container">M'intéresse
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                  </label>
+            </div>
+            <div class="bloc">
+                <img src="https://fr.web.img3.acsta.net/pictures/19/12/05/17/24/2034927.jpg">
+                <p>Mulan</p>
+                <p>22 Juillet 2020</p>
+                <p>De Niki Caro</p>
+                <label class="container">M'intéresse
+                    <input type="checkbox" >
+                    <span class="checkmark"></span>
+                  </label>
+            </div>
+            <div class="bloc">
+                <img src="https://fr.web.img6.acsta.net/pictures/20/03/25/15/45/1789056.jpg">
+                <p>Wonder Woman 1984</p>
+                <p>12 août 2020</p>
+                <p>Wonder Woman 1984</p>
+                <label class="container">M'intéresse
+                    <input type="checkbox" >
+                    <span class="checkmark"></span>
+                  </label>
+            </div>
+            <div class="bloc">
+                <img src="https://oyster.ignimgs.com/wordpress/stg.ign.com/2020/01/EPJd774XsAEyLSx.jpg-orig.jpg">
+                <p>The New Mutants</p>
+                <p>26 Août 2020</p>
+                <p>De Josh Boone</p>
+                <label class="container">M'intéresse
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                  </label>
+            </div>
+            <div class="bloc">
+                <img src="https://www.cinemaclock.com/images/posters/1000x1500/8/-the-conjuring-the-devil-made-me-do-it-2020-2020-i-movie-poster.jpg">
+                <p>The Conjuring: The Devil Made Me Do It</p>
+                <p>16 septembre 2020</p>
+                <p>De Michael Chaves</p>
+                <label class="container">M'intéresse
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                  </label>
+            </div>
+            <div class="bloc">
+                <img src="https://fr.web.img2.acsta.net/pictures/19/09/30/14/56/4105682.jpg">
+                <p>The King&#39;s Man : First Mission</p>
+                <p>23 septembre 2020</p>
+                <p>de Matthew Vaughn</p>
+                <label class="container">M'intéresse
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                  </label>
+            </div>
+            <div class="bloc">
+                <img src="https://fr.web.img2.acsta.net/pictures/19/09/30/14/56/4105682.jpg">
+                <p>The French Dispatch</p>
+                <p>14 Octobre 2020 </p>
+                <p>de Wes Anderson</p>
+                <label class="container">M'intéresse
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                  </label>
+            </div>
+            <div class="bloc">
+                <img src="https://fr.web.img6.acsta.net/pictures/20/03/09/14/46/0710391.jpg">
+                <p>Black Widow</p>
+                <p>28 octobre 2020</p>
+                <p>de Cate Shortland</p>
+                <label class="container">M'intéresse
+                    <input type="checkbox" >
+                    <span class="checkmark"></span>
+                  </label>
+            </div>
+            <div class="bloc">
+                <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSsGYckb0jv-6Jk_xAExch2JoEajZPcd2Td9wwr2CaIDsRtJA4H">
+                <p>No Time to Die</p>
+                <p>11 Novembre 2020</p>
+                <p>De Cary Joji Fukunaga</p>
+                <label class="container">M'intéresse
+                    <input type="checkbox" >
+                    <span class="checkmark"></span>
+                  </label>
+            </div>
+            <div class="bloc">
+                <img src="http://fr.web.img6.acsta.net/r_1920_1080/pictures/20/01/23/10/08/0198949.jpg">
+                <p>Kaamelott : Premier Volet</p>
+                <p>25 Novembre 2020</p>
+                <p>De Alexandre Astier</p>
+                <label class="container">M'intéresse
+                    <input type="checkbox" >
+                    <span class="checkmark"></span>
+                  </label>
+            </div>
+            <div class="bloc">
+                <img src="https://media.senscritique.com/media/000019312284/source_big/Dune.jpg">
+                <p>Dune</p>
+                <p>23 Décembre 2020</p>
+                <p>De Denis Villeneuve</p>
+                <label class="container">M'intéresse
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                  </label>
+            </div>
+        </div>
+      
+
+        
+    </section>
+
+    <footer>
+        <section class="ft-social">
+            <ul class="ft-social-list">
+                <li><a href="https://www.facebook.com/senscritique" target="_blank"><i class="fab fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/senscritique" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="https://www.instagram.com/senscritique/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="https://www.youtube.com/channel/UC0z41jmnOz-YHrmECr9sVzw" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                <li class="text-right"><a href="info.html">Qui sommes-nous ?</a></li>
+            </ul>
+        </section>
+
+    </footer>
+    
+</body>
+</html>

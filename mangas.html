@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/fe6070e42e.js" crossorigin="anonymous"></script>
+    <link href="https://file.myfontastic.com/FVqhjvFpRBCZQjWy3VpicD/icons.css" rel="stylesheet">
+
+    <script src="../js/script.js"></script>
+    <link href="../css/style.css" rel="stylesheet">
+
+    <title>Films</title>
+    <script>
+        $(document).ready(function(){
+            
+            $('#term').focus(function(){
+                var full = $("#poster").has("img").length ? true : false;
+                if(full == false){
+                    $('#poster').empty();
+                }
+            });
+
+            var getPoster = function(){
+
+                var film = $('#term').val();
+
+                if(film == ''){
+
+                    $('#poster').html('<div class="alert"><strong>Oops!</strong> Try adding something into the search field.</div>');
+
+                } else {
+
+                    $('#poster').html('<div class="alert"><strong>Loading...</strong></div>');
+
+                    $.getJSON("https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=" + film + "&callback=?", function(json) {
+                        if (json != "Nothing found."){
+                            console.log(json);
+                            $('#poster').html('<p>Your search found: <strong>' + json.results[0].title + '</strong></p><img src=\"http://image.tmdb.org/t/p/w500/' + json.results[0].poster_path + '\" class=\"img-responsive\" >');
+                        } else {
+                            $.getJSON("https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=goonies&callback=?", function(json) {
+
+                                console.log(json);
+                                $('#poster').html('<div class="alert"><p>We\'re afraid nothing was found for that search.</p></div><p>Perhaps you were looking for The Goonies?</p><img id="thePoster" src="http://image.tmdb.org/t/p/w500/' + json[0].poster_path + ' class="img-responsive" />');
+                            });
+                        }
+                    });
+
+                }
+
+                return false;
+            }
+
+            $('#search').click(getPoster);
+            $('#term').keyup(function(event){
+                if(event.keyCode == 13){
+                    getPoster();
+                }
+            });
+
+        });
+
+
+
+    </script>
+</head>
+<body>
+    <nav class="top-nav">
+        <div>
+            <img src="../images/logo.PNG" alt="logo" class="logo">
+        </div>
+        <input id="menu-toggle" type="checkbox" />
+        <label class='menu-button-container' for="menu-toggle">
+            <div class='menu-button'></div>
+        </label>
+
+        <ul class="menu">
+          <li><a href="../index.html">Accueil</a></li>
+          <li><a href="films.html">Films</a></li>
+          <li><a href="mangas.html">Mangas</a></li>
+        </ul>
+    </nav>
+    <section class="main">
+
+
+
+        <h2>Les meilleurs mangas à venir !</h2>
+        <div class="content-film">
+            <div class="bloc">
+                <img src="https://www.ledojomanga.com/bdd_local/upload/images/Gibiate-teaser.jpg">
+                <p>Gibiate</p>
+                <p>8 Juillet 2020</p>
+                <p>De Yoshitaka Amano</p>
+                <label class="container">M'intéresse
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                  </label>
+            </div>
+            <div class="bloc">
+                <img src="https://www.nautiljon.com/images/more/02/01/175210.jpg">
+                <p>Vlad love</p>
+                <p>Octobre 2020</p>
+                <p>De Mamoru Oshii</p>
+                <label class="container">M'intéresse
+                    <input type="checkbox" >
+                    <span class="checkmark"></span>
+                  </label>
+            </div>
+            <div class="bloc">
+                <img src="https://adala-news.fr/wp-content/uploads/2019/12/Dragon-Quest-Dai-no-Daibouken-image-teaser-002.png">
+                <p>Dragon Quest: Dai no Daibouken</p>
+                <p>12 août 2020</p>
+                <p>De Koji Inada et Riku Sanjo</p>
+                <label class="container">M'intéresse
+                    <input type="checkbox" >
+                    <span class="checkmark"></span>
+                  </label>
+            </div>
+            <div class="bloc">
+                <img src="https://www.japanfm.fr/wp-content/uploads/2020/05/Attack-on-Titan-Saison-4-date-de-sortie-distribution-intrigue.jpg">
+                <p>L'Attaque des Titans 4 : Saison finale</p>
+                <p>Octobre 2020</p>
+                <p>De Hajime Isayama</p>
+                <label class="container">M'intéresse
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                  </label>
+            </div>
+            <div class="bloc">
+                <img src="https://adala-news.fr/wp-content/uploads/2020/01/To-Your-Eternity-anime-Teaser-image.png">
+                <p>To Your Eternity</p>
+                <p>Octobre 2020</p>
+                <p>De Masahiko Murata</p>
+                <label class="container">M'intéresse
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                  </label>
+            </div>
+            <div class="bloc">
+                <img src="https://adala-news.fr/wp-content/uploads/2019/07/Deca-Dence-anime-teaser-image.jpg">
+                <p>Deca-Dence</p>
+                <p>Octobre 2020</p>
+                <p>de Yuzuru Tachikawa</p>
+                <label class="container">M'intéresse
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                  </label>
+            </div>
+            <div class="bloc">
+                <img src="https://staticr1.blastingcdn.com/p/4/2019/04/02/v_640x360/0d657e84-227e-4b2e-9df9-5711d7ad0ed8.jpg">
+                <p>The Promised Neverland 2</p>
+                <p>Janvier 2021</p>
+                <p>de Mamoru Kanbe</p>
+                <label class="container">M'intéresse
+                    <input type="checkbox" checked="checked">
+                    <span class="checkmark"></span>
+                  </label>
+            </div>
+            <div class="bloc">
+                <img src="https://www.nautiljon.com/images/manga/00/61/jujutsu_kaisen_8916.jpg">
+                <p>Jujutsu Kaisen</p>
+                <p>28 octobre 2020</p>
+                <p>de Akutami Gege</p>
+                <label class="container">M'intéresse
+                    <input type="checkbox" >
+                    <span class="checkmark"></span>
+                  </label>
+            </div>
+        
+    </section>
+
+    <footer>
+        <section class="ft-social">
+            <ul class="ft-social-list">
+                <li><a href="https://www.facebook.com/senscritique" target="_blank"><i class="fab fa-facebook"></i></a></li>
+                <li><a href="https://twitter.com/senscritique" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="https://www.instagram.com/senscritique/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="https://www.youtube.com/channel/UC0z41jmnOz-YHrmECr9sVzw" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                <li class="text-right"><a href="info.html">Qui sommes-nous ?</a></li>
+            </ul>
+        </section>
+
+    </footer>
+    
+</body>
+</html>
